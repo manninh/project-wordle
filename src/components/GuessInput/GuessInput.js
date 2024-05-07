@@ -1,22 +1,25 @@
 import React from "react";
 
-function GuessInput() {
-  const [guess, setGuess] = React.useState({ guess: "" });
+function GuessInput({ guesses, setGuesses }) {
+  const [currentGuess, setCurrentGuess] = React.useState("");
 
   return (
     <form
       className="guess-input-wrapper"
       onSubmit={(e) => {
         e.preventDefault();
-        if (guess.guess.length === 5) {
-          console.log(guess);
-          setGuess({ guess: "" });
+        if (currentGuess.length === 5) {
+          setGuesses([
+            ...guesses,
+            { guess: currentGuess, key: crypto.randomUUID() },
+          ]);
+          setCurrentGuess("");
         }
       }}
     >
       <label htmlFor="guess-input">Enter guess:</label>
       <input
-        value={guess.guess}
+        value={currentGuess}
         id="guess-input"
         type="text"
         onChange={(e) => onUpdateGuess(e.target.value)}
@@ -28,7 +31,7 @@ function GuessInput() {
     if (guessInput.length > 5) {
       return;
     }
-    setGuess({ guess: guessInput.toUpperCase() });
+    setCurrentGuess(guessInput.toUpperCase());
   }
 }
 
