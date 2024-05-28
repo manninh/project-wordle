@@ -15,7 +15,11 @@ function Game() {
   return (
     <>
       <GuessResults guesses={guesses} answer={answer}></GuessResults>
-      <GuessInput guesses={guesses} setGuesses={setGuesses}></GuessInput>
+      <GuessInput
+        guesses={guesses}
+        setGuesses={setGuesses}
+        answer={answer}
+      ></GuessInput>
     </>
   );
 }
